@@ -532,7 +532,7 @@ public class Ventana extends javax.swing.JFrame {
     }
     public float prueba4()
     {
-        float saldoPrueba = 10000;
+        float saldoPrueba = 50000;
         return saldoPrueba;
     }
     
