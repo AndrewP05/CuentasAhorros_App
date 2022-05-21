@@ -1,5 +1,6 @@
 package grafico;
 
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 public class Ventana extends javax.swing.JFrame {
@@ -156,7 +157,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(JCTxID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JTxTipoId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(JCTxTipoID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JTxSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,7 +369,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JBtCrearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JPanelNCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(JBtBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -389,15 +390,15 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(JBtCrearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBtBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(JPanelNCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JPanelCuentaEx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(18, 33, Short.MAX_VALUE)
                 .addComponent(JBtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(930, 527));
+        setSize(new java.awt.Dimension(983, 566));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -458,7 +459,7 @@ public class Ventana extends javax.swing.JFrame {
         JPanelCuentaEx.setVisible(false);
         JPanelNCuenta.setVisible(false);
         JBtCrearCuenta.setEnabled(true);
-        
+        guardarDatosCrearCuenta();
         //System.exit(0);
     }//GEN-LAST:event_JBtCrearActionPerformed
 
@@ -551,9 +552,20 @@ public class Ventana extends javax.swing.JFrame {
         return saldoPrueba;
     }
     
-
-
-
-
+    public void guardarDatosCrearCuenta()
+    {
+        String nombre = JCTxNombre.getText();
+        String identificacion = JCTxID.getText();
+        String tipoIdentificacion = JCTxTipoID.getText();
+        String SALDO = JCTxValor.getText();
+        
+        //Esta parte se usa para comvertir un String en Double.
+        double saldo = Double.parseDouble(SALDO);
+        
+        
+        //Esta opcion permite darle formato a las cifras decimales.
+        DecimalFormat formatea = new DecimalFormat("###,###.##");
+        //System.out.println("$"+formatea.format(saldo));
+    }
 }
 
