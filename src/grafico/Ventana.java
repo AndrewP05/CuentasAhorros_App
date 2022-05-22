@@ -120,6 +120,11 @@ public class Ventana extends javax.swing.JFrame {
         JTxTipoId.setText("Tipo de Identificación");
 
         JCTxTipoID.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(115, 145, 174), 2));
+        JCTxTipoID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCTxTipoIDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPanelNCuentaLayout = new javax.swing.GroupLayout(JPanelNCuenta);
         JPanelNCuenta.setLayout(JPanelNCuentaLayout);
@@ -157,9 +162,9 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(JCTxID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JTxTipoId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(JCTxTipoID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(JTxSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JCTxValor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -426,8 +431,8 @@ public class Ventana extends javax.swing.JFrame {
         JBtConsignar.setEnabled(true);
         JBtRetirar.setEnabled(true);
         JCTxIDCue.setEnabled(false);
-        
-        JTxNombreEx.setText("Nombre: "+prueba1());
+        //pruebas
+        JTxNombreEx.setText("Nombre: "+pruebra5());
         JTxIdEx.setText("Identificacion: "+prueba());
         JTxTipoIdCuenta.setText("Tipo Identificacion: "+prueba3());
         JTxSaldoEx.setText("Saldo: "+prueba4());
@@ -474,6 +479,10 @@ public class Ventana extends javax.swing.JFrame {
     private void JBtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtCancelarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_JBtCancelarActionPerformed
+
+    private void JCTxTipoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCTxTipoIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCTxTipoIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -566,6 +575,15 @@ public class Ventana extends javax.swing.JFrame {
         //Esta opcion permite darle formato a las cifras decimales.
         DecimalFormat formatea = new DecimalFormat("###,###.##");
         //System.out.println("$"+formatea.format(saldo));
+        System.out.println(""+nombre+" "+identificacion+" "+tipoIdentificacion+" "+saldo);
     }
+    public String pruebra5()
+    {
+        //se usa para llamar los datos creados anterior mente
+        String nombre = JCTxNombre.getText();
+        return nombre; 
+    }
+    
+    
 }
 

@@ -2,7 +2,7 @@ package operaciones;
 
 import datos.*;
 
-public class GestionDatos 
+public class GestionDatos extends GestionDatosC
 {
     public Cliente crearCliente(String nombre, String identificacion, float saldo)
     {
@@ -34,7 +34,7 @@ public class GestionDatos
             
             String Digitos = (Character.toString(num1)+Character.toString(num2)+Character.toString(num3)+Character.toString(num4));
             
-            String numeroCuenta ="57"+"22"+Digitos;
+            String numeroCuenta ="57"+"22"+Digitos+construirAleatoreo();
             
             return numeroCuenta;
         }
@@ -58,4 +58,37 @@ public class GestionDatos
         
         return false;
     }
+
+    @Override
+    public int[] construirAleatoreo() 
+    {
+        int numero[] = new int [4];
+        
+        int num1 = generarAleatoreo();
+        numero [0]=num1;
+        int posicion=1;
+        while(posicion<4)
+        {
+           int num2 = generarAleatoreo();
+           boolean existe=false;
+           for(int i=0; i<posicion; i++){
+               if (numero[i]==num2)
+               {
+                   existe=true;
+               }
+           }
+           if(!existe )
+           {
+               numero [posicion++]=num2;
+           }
+ 
+        }
+        return numero;
+    }
+    @Override
+    public String toString()
+    {
+        return "El numero es: "+this.construirAleatoreo();
+    }
+
 }
