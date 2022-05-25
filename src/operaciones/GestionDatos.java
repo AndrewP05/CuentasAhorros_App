@@ -2,6 +2,7 @@ package operaciones;
 
 import datos.*;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Map;
 import utilidades.GestorPersistencia;
 import java.util.Date;
@@ -26,20 +27,21 @@ public class GestionDatos extends GestionDatosC implements Serializable
     }
     
     
-    public Cliente crearCliente(String nombre, String identificacion, double saldo, String tipoId)
+    public Cliente crearCliente(String nombre, String identificacion, String tipoId)
     {
         Cliente cl = new Cliente();
         cl.obtenerNombre(nombre);
         cl.obtenerIdentificacion(identificacion);
         cl.obtenerTipoId(tipoId);
-        cl.obtenerSaldo(saldo);
+        
         
         return cl;
     }
+
     
     public Cuenta crearCuenta(String nombre, String identificacion, double saldo, String tipoId)
     {
-        Cliente elCliente = this.crearCliente(nombre, identificacion, saldo, tipoId);
+        Cliente elCliente = this.crearCliente(nombre, identificacion, tipoId);
         Cuenta cu = new Cuenta(elCliente, saldo,extraerDigitosId(identificacion) ) ;
         //cu.obtenerCliente();
         //cu.obtenerNumCuenta();
@@ -64,9 +66,9 @@ public class GestionDatos extends GestionDatosC implements Serializable
             
             String Digitos = (Character.toString(num1)+Character.toString(num2)+Character.toString(num3)+Character.toString(num4));
             
-            String n = construirAleatoreo().toString();
-            String numeroCuenta ="57"+"22"+Digitos+n;
-            
+            int [] n = construirAleatoreo();
+            String numeroCuenta ="57"+"22"+Digitos+Arrays.toString(n).format("", "");
+            toString();
             return numeroCuenta;
         }
         else
@@ -75,6 +77,9 @@ public class GestionDatos extends GestionDatosC implements Serializable
         }
         
     }
+    
+
+    
     
     public boolean buscarCuenta(Cuenta Cuenta, Cliente elCliente, String identificacion, String tipoId)
     {
@@ -122,8 +127,12 @@ public class GestionDatos extends GestionDatosC implements Serializable
     {
         return "El numero es: "+this.construirAleatoreo();
     }
+
     
-    public Map<String, Cuenta> obtenerLista(){
+    public Map<String, Cuenta> obtenerLista()
+    {
         return (Map<String, Cuenta>) this.ListaCuentas;
+        
+                
     }
 }

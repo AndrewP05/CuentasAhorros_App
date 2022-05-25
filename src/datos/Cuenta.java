@@ -8,13 +8,13 @@ public class Cuenta implements Serializable
     private double saldo;
     private String numCuenta;
 
-    public Cuenta(Cliente elCliente, double saldo, String numCuenta) {
+    public Cuenta(Cliente elCliente, double saldo, String numCuenta) 
+    {
         this.elCliente = elCliente;
         this.saldo = saldo;
         this.numCuenta = numCuenta;
     }
-    
-    
+
     public Cliente obtenerCliente()
     {
         return this.elCliente;
@@ -34,7 +34,7 @@ public class Cuenta implements Serializable
     @Override
     public String toString()
     {
-        return "Numero de cuenta: "+numCuenta+" del cliente: "+elCliente;
+        return "numero de cuenta: "+numCuenta+" del cliente: "+elCliente+" con saldo :"+saldo;
     }
    
     

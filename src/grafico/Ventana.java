@@ -377,14 +377,15 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JBtCrearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JPanelNCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(JBtBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                         .addComponent(JPanelCuentaEx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))))
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JBtBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(JBtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -401,7 +402,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(JPanelNCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JPanelCuentaEx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 33, Short.MAX_VALUE)
+                .addGap(18, 32, Short.MAX_VALUE)
                 .addComponent(JBtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -435,10 +436,12 @@ public class Ventana extends javax.swing.JFrame {
         JBtRetirar.setEnabled(true);
         JCTxIDCue.setEnabled(false);
         //pruebas
-        JTxNombreEx.setText("Nombre: "+pruebraNombre());
+        GestionDatos sdsd = new GestionDatos();
+        sdsd.ListaCuentas.containsValue(JCTxNombre);
+        JTxNombreEx.setText("Nombre: "+sdsd.ListaCuentas.containsKey(57225454));
         JTxIdEx.setText("Identificacion: "+pruebaIdentificacion());
         JTxTipoIdCuenta.setText("Tipo Identificacion: "+prueba3());
-        JTxSaldoEx.setText("Saldo: "+prueba4());
+        JTxSaldoEx.setText("Saldo: ");
         JBoxTipoId.setEnabled(false);
         JPanelCuentaEx.setVisible(true);
     }//GEN-LAST:event_JBtBuscarActionPerformed
@@ -476,6 +479,10 @@ public class Ventana extends javax.swing.JFrame {
         JBtCrearCuenta.setEnabled(true);
         guardarDatosCrearCuenta();
         //System.exit(0);
+        cargarCuentas();
+        JCTxNombre.setText("");
+        JCTxID.setText("");
+        JCTxValor.setText("");
         
     }//GEN-LAST:event_JBtCrearActionPerformed
 
@@ -571,6 +578,7 @@ public class Ventana extends javax.swing.JFrame {
         float saldoPrueba = 50000;
         return saldoPrueba;
     }
+
     
     public void guardarDatosCrearCuenta()
     {
@@ -585,11 +593,13 @@ public class Ventana extends javax.swing.JFrame {
         GestionDatos g = new GestionDatos();
         Cuenta c = g.crearCuenta(nombre, identificacion, saldo, tipoIdentificacion);// g.crearCliente(nombre, identificacion, saldo,tipoIdentificacion);
         
-        if (c!=null ){
+        if (c!=null )
+        {
             cargarCuentas();
-            JOptionPane.showMessageDialog(this, "Se creo la cuenta ->"+c);
+            JOptionPane.showMessageDialog(this, "Se creo la cuenta con "+c);
             
-        }else{
+        }else
+        {
             JOptionPane.showMessageDialog(this, " no creo la cuenta");
         }
         
@@ -597,7 +607,7 @@ public class Ventana extends javax.swing.JFrame {
         //Esta opcion permite darle formato a las cifras decimales.
         DecimalFormat formatea = new DecimalFormat("###,###.##");
         //System.out.println("$"+formatea.format(saldo));
-        System.out.println(""+nombre+" "+identificacion+" "+tipoIdentificacion+" "+saldo);
+        //System.out.println(""+nombre+" "+identificacion+" "+tipoIdentificacion+" "+saldo);
     }
     public String pruebraNombre()
     {
@@ -610,6 +620,7 @@ public class Ventana extends javax.swing.JFrame {
         String identificacion = JCTxID.getText();
         return identificacion;
     }
+    
     public void cargarCuentas()
     {
         GestionDatos gestor = new GestionDatos();
@@ -623,7 +634,7 @@ public class Ventana extends javax.swing.JFrame {
                 
 
             };
-            
+            System.out.println(""+nova.obtenerCliente()+" Cuenta: "+nova.obtenerNumCuenta());
         }
     }
     
