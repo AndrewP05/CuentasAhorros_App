@@ -1,17 +1,20 @@
 package datos;
 
-public class Cliente 
+import java.io.Serializable;
+
+public class Cliente implements Serializable
 {
     private String nombre;
     private String identificacion;
     private String tipoId;
-    private float saldo;
+    private double saldo;
     
     public String obtenerNombre(String nombre)
     {
         return this.nombre = nombre;
     }
     
+
     public String obtenerIdentificacion(String identificacion)
     {
         return this.identificacion = identificacion;
@@ -22,9 +25,9 @@ public class Cliente
         return this.tipoId = tipoId;
     }
     
-    public float obtenerSaldo(float saldo)
+    public double obtenerSaldo(double saldo)
     {
-        return this.saldo;
+        return this.saldo = saldo;
     }
     
     @Override

@@ -1,25 +1,55 @@
 package operaciones;
 
 import datos.*;
+import java.io.Serializable;
+import java.util.Map;
+import utilidades.GestorPersistencia;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class GestionDatos extends GestionDatosC
+
+public class GestionDatos extends GestionDatosC implements Serializable
 {
-    public Cliente crearCliente(String nombre, String identificacion, float saldo)
+    public Map<String, Cuenta> ListaCuentas;
+    public GestionDatos()
+    {
+        if(ListaCuentas == null)
+        {
+            ListaCuentas = (Map<String, Cuenta>) GestorPersistencia.recuperar();
+            if(ListaCuentas == null)
+            {
+                ListaCuentas = new HashMap<>();
+            }
+        }
+        
+    }
+    
+    
+    public Cliente crearCliente(String nombre, String identificacion, double saldo, String tipoId)
     {
         Cliente cl = new Cliente();
         cl.obtenerNombre(nombre);
         cl.obtenerIdentificacion(identificacion);
+        cl.obtenerTipoId(tipoId);
         cl.obtenerSaldo(saldo);
         
         return cl;
     }
     
-    public Cuenta crearCuenta(Cliente elCliente, String numCuenta)
+    public Cuenta crearCuenta(String nombre, String identificacion, double saldo, String tipoId)
     {
-        Cuenta cu = new Cuenta() {};
-        cu.obtenerCliente(elCliente);
-        cu.obtenerNumCuenta(numCuenta);
+        Cliente elCliente = this.crearCliente(nombre, identificacion, saldo, tipoId);
+        Cuenta cu = new Cuenta(elCliente, saldo,extraerDigitosId(identificacion) ) ;
+        //cu.obtenerCliente();
+        //cu.obtenerNumCuenta();
+        //cu.obtenerSaldo();
+        
+        //Cliente cli = this.crearCliente(numCuenta, numCuenta, 0);
+        ListaCuentas.put(cu.obtenerNumCuenta(),cu);
+        GestorPersistencia.guardar(ListaCuentas);
         return cu;
+        
         
     }
     
@@ -34,7 +64,8 @@ public class GestionDatos extends GestionDatosC
             
             String Digitos = (Character.toString(num1)+Character.toString(num2)+Character.toString(num3)+Character.toString(num4));
             
-            String numeroCuenta ="57"+"22"+Digitos+construirAleatoreo();
+            String n = construirAleatoreo().toString();
+            String numeroCuenta ="57"+"22"+Digitos+n;
             
             return numeroCuenta;
         }
@@ -47,8 +78,8 @@ public class GestionDatos extends GestionDatosC
     
     public boolean buscarCuenta(Cuenta Cuenta, Cliente elCliente, String identificacion, String tipoId)
     {
-        Cuenta cu = new Cuenta() {};
-        cu.obtenerCliente(elCliente);
+        Cuenta cu = new Cuenta(elCliente, 0, tipoId);
+        cu.obtenerCliente();
         Cliente cli = new Cliente();
         String idObtenida = cli.obtenerIdentificacion(identificacion);
         cli.obtenerTipoId(tipoId);
@@ -85,10 +116,14 @@ public class GestionDatos extends GestionDatosC
         }
         return numero;
     }
+
     @Override
     public String toString()
     {
         return "El numero es: "+this.construirAleatoreo();
     }
-
+    
+    public Map<String, Cuenta> obtenerLista(){
+        return (Map<String, Cuenta>) this.ListaCuentas;
+    }
 }

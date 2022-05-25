@@ -1,25 +1,34 @@
 package datos;
 
-public abstract class  Cuenta   
+import java.io.Serializable;
+
+public class Cuenta implements Serializable
 {
     private Cliente elCliente;
-    private String saldo;
+    private double saldo;
     private String numCuenta;
-    
-    public Cliente obtenerCliente(Cliente elCliente)
-    {
-        return this.elCliente = elCliente;
+
+    public Cuenta(Cliente elCliente, double saldo, String numCuenta) {
+        this.elCliente = elCliente;
+        this.saldo = saldo;
+        this.numCuenta = numCuenta;
     }
     
-    public String obtenerNumCuenta(String numCuenta)
+    
+    public Cliente obtenerCliente()
+    {
+        return this.elCliente;
+    }
+    public String obtenerNumCuenta()
     {
         return this.numCuenta = numCuenta;
     }
     
-    public String obtenerSaldo(String saldo)
+    public double obtenerSaldo()
     {
         return this.saldo = saldo;
     }
+    
     
     
     @Override

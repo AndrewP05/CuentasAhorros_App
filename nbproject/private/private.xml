@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/PoB/CuentasAhorro_App/src/datos/Cliente.java</file>
+            <file>file:/D:/PoB/CuentasAhorro_App/src/datos/Cuenta.java</file>
+            <file>file:/D:/PoB/CuentasAhorro_App/src/utilidades/GestorPersistencia.java</file>
             <file>file:/D:/PoB/CuentasAhorro_App/src/operaciones/GestionDatos.java</file>
-            <file>file:/D:/PoB/CuentasAhorro_App/src/operaciones/GestionDatosC.java</file>
-            <file>file:/D:/PoB/CuentasAhorro_App/Test/test/pruebaGestionDatos.java</file>
+            <file>file:/D:/PoB/CuentasAhorro_App/src/grafico/Ventana.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,7 +1,11 @@
 package grafico;
 
 import java.text.DecimalFormat;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import operaciones.GestionDatos;
+import datos.*;
+import java.awt.Color;
 
 public class Ventana extends javax.swing.JFrame {
 
@@ -10,6 +14,7 @@ public class Ventana extends javax.swing.JFrame {
         JPanelNCuenta.setVisible(false);
         JPanelCuentaEx.setVisible(false);
         JPanelCuenta.setVisible(false);
+        this.getContentPane().setBackground(Color.lightGray);
         
     }
 
@@ -33,7 +38,7 @@ public class Ventana extends javax.swing.JFrame {
         JCTxValor = new javax.swing.JTextField();
         JBtCrear = new javax.swing.JButton();
         JTxTipoId = new javax.swing.JLabel();
-        JCTxTipoID = new javax.swing.JTextField();
+        JBoxTipoIDN = new javax.swing.JComboBox<>();
         JBtCancelar = new javax.swing.JButton();
         JPanelCuentaEx = new javax.swing.JPanel();
         JTxIDCu = new javax.swing.JLabel();
@@ -75,7 +80,6 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         JPanelNCuenta.setBackground(new java.awt.Color(201, 218, 235));
-        JPanelNCuenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(115, 145, 174), 3));
 
         JTxNombre.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
         JTxNombre.setText("Nombre completo: ");
@@ -119,12 +123,7 @@ public class Ventana extends javax.swing.JFrame {
         JTxTipoId.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
         JTxTipoId.setText("Tipo de Identificación");
 
-        JCTxTipoID.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(115, 145, 174), 2));
-        JCTxTipoID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JCTxTipoIDActionPerformed(evt);
-            }
-        });
+        JBoxTipoIDN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cedula de Ciudadania", "Tarjeta de Extranjeria", "Tarjeta de Identidad", "Cedula de Extranjeria" }));
 
         javax.swing.GroupLayout JPanelNCuentaLayout = new javax.swing.GroupLayout(JPanelNCuenta);
         JPanelNCuenta.setLayout(JPanelNCuentaLayout);
@@ -146,7 +145,7 @@ public class Ventana extends javax.swing.JFrame {
                                 .addComponent(JTxID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(JCTxNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(JTxNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(JCTxTipoID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(JBoxTipoIDN, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 35, Short.MAX_VALUE))
         );
         JPanelNCuentaLayout.setVerticalGroup(
@@ -163,8 +162,8 @@ public class Ventana extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JTxTipoId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(JCTxTipoID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(JBoxTipoIDN, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(JTxSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JCTxValor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,13 +183,17 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         JPanelCuentaEx.setBackground(new java.awt.Color(199, 216, 233));
-        JPanelCuentaEx.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(117, 147, 177), 3, true));
 
         JTxIDCu.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
         JTxIDCu.setText("N° Identificacion: ");
 
         JCTxIDCue.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
         JCTxIDCue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(117, 147, 177), 2));
+        JCTxIDCue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCTxIDCueActionPerformed(evt);
+            }
+        });
 
         JBtBuscar.setBackground(new java.awt.Color(204, 204, 204));
         JBtBuscar.setFont(new java.awt.Font("Perpetua", 1, 15)); // NOI18N
@@ -296,7 +299,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(JTxSaldoEx, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JTxTipoIdCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(JPanelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBtRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBtConsignar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -374,7 +377,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JBtCrearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JPanelNCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(JBtBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -432,10 +435,12 @@ public class Ventana extends javax.swing.JFrame {
         JBtRetirar.setEnabled(true);
         JCTxIDCue.setEnabled(false);
         //pruebas
-        JTxNombreEx.setText("Nombre: "+pruebra5());
-        JTxIdEx.setText("Identificacion: "+prueba());
+        JTxNombreEx.setText("Nombre: "+pruebraNombre());
+        JTxIdEx.setText("Identificacion: "+pruebaIdentificacion());
         JTxTipoIdCuenta.setText("Tipo Identificacion: "+prueba3());
         JTxSaldoEx.setText("Saldo: "+prueba4());
+        JBoxTipoId.setEnabled(false);
+        JPanelCuentaEx.setVisible(true);
     }//GEN-LAST:event_JBtBuscarActionPerformed
 
     private void JBtRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtRetirarActionPerformed
@@ -458,6 +463,11 @@ public class Ventana extends javax.swing.JFrame {
         JCTxSaldoConsignar.setEnabled(false);
         JBtConsignar.setEnabled(true);
         JBtRetirar.setEnabled(true);
+        JBoxTipoId.setEnabled(true);
+        JPanelCuenta.setVisible(false);
+        JCTxSaldoConsignar.setVisible(true);
+        JCTxSaldoRetirar.setVisible(true);
+        JCTxIDCue.setEnabled(true);
     }//GEN-LAST:event_JBtAceptarCuentaActionPerformed
 
     private void JBtCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtCrearActionPerformed
@@ -466,6 +476,7 @@ public class Ventana extends javax.swing.JFrame {
         JBtCrearCuenta.setEnabled(true);
         guardarDatosCrearCuenta();
         //System.exit(0);
+        
     }//GEN-LAST:event_JBtCrearActionPerformed
 
     private void JCTxValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCTxValorActionPerformed
@@ -480,9 +491,9 @@ public class Ventana extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_JBtCancelarActionPerformed
 
-    private void JCTxTipoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCTxTipoIDActionPerformed
+    private void JCTxIDCueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCTxIDCueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JCTxTipoIDActionPerformed
+    }//GEN-LAST:event_JCTxIDCueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -498,6 +509,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> JBoxTipoIDN;
     private javax.swing.JComboBox<String> JBoxTipoId;
     private javax.swing.JButton JBtAceptarCuenta;
     private javax.swing.JButton JBtBuscar;
@@ -512,7 +524,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField JCTxNombre;
     private javax.swing.JTextField JCTxSaldoConsignar;
     private javax.swing.JTextField JCTxSaldoRetirar;
-    private javax.swing.JTextField JCTxTipoID;
     private javax.swing.JTextField JCTxValor;
     private javax.swing.JPanel JPanelCuenta;
     private javax.swing.JPanel JPanelCuentaEx;
@@ -565,11 +576,22 @@ public class Ventana extends javax.swing.JFrame {
     {
         String nombre = JCTxNombre.getText();
         String identificacion = JCTxID.getText();
-        String tipoIdentificacion = JCTxTipoID.getText();
+        String tipoIdentificacion = JBoxTipoIDN.getSelectedItem().toString();
         String SALDO = JCTxValor.getText();
         
         //Esta parte se usa para comvertir un String en Double.
         double saldo = Double.parseDouble(SALDO);
+        
+        GestionDatos g = new GestionDatos();
+        Cuenta c = g.crearCuenta(nombre, identificacion, saldo, tipoIdentificacion);// g.crearCliente(nombre, identificacion, saldo,tipoIdentificacion);
+        
+        if (c!=null ){
+            cargarCuentas();
+            JOptionPane.showMessageDialog(this, "Se creo la cuenta ->"+c);
+            
+        }else{
+            JOptionPane.showMessageDialog(this, " no creo la cuenta");
+        }
         
         
         //Esta opcion permite darle formato a las cifras decimales.
@@ -577,11 +599,32 @@ public class Ventana extends javax.swing.JFrame {
         //System.out.println("$"+formatea.format(saldo));
         System.out.println(""+nombre+" "+identificacion+" "+tipoIdentificacion+" "+saldo);
     }
-    public String pruebra5()
+    public String pruebraNombre()
     {
         //se usa para llamar los datos creados anterior mente
         String nombre = JCTxNombre.getText();
         return nombre; 
+    }
+    public String pruebaIdentificacion()
+    {
+        String identificacion = JCTxID.getText();
+        return identificacion;
+    }
+    public void cargarCuentas()
+    {
+        GestionDatos gestor = new GestionDatos();
+        Map<String, Cuenta> lista = gestor.obtenerLista();
+        for (Map.Entry<String, Cuenta> dato  : lista.entrySet()) {
+            Cuenta nova = dato.getValue();
+            Object[] datos = {
+                nova.obtenerCliente(),
+                    nova.obtenerNumCuenta(),
+                        nova.obtenerSaldo()
+                
+
+            };
+            
+        }
     }
     
     
